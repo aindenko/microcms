@@ -1,0 +1,36 @@
+body {
+    font-family: Calibri, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.main{
+    display: table;
+    width: 100%;
+}
+
+.col{
+    display: table-cell;
+    width: 20%;
+}
+
+.right_col{
+    display: table-cell;
+    vertical-align:middle;
+}
+.content{
+    min-width:800px;
+}
+.left_col{
+    display: table-cell;
+    vertical-align:middle;
+}
+
+
+
+.header{
+    height: 100px;
+}
+
+.clear{
+    clear: both;
+}
