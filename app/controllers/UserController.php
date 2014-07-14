@@ -44,12 +44,12 @@ class UserController extends Controller {
                  $this->app->view->login = $this->app->view->render('loginscs.phtml');
             }
         }
-
+        header('Location: /');
     }
 
 
     public function logoutAction(){
        unset($_SESSION['user']);
-
+        header('Location: /');
     }
 } 

@@ -60,11 +60,12 @@ class App{
             if(!empty($paramsArr[2])&&$paramsArr[1]!='article'){
                 $actionName = $paramsArr[2].'Action';
                 $templateName = $paramsArr[2].'.phtml';
-
+            } elseif($paramsArr[2]=='save'){
+                $actionName = $paramsArr[2].'Action';
             }
         } else {
 
-            $controllerName = "controllers\\".'IndexController';
+            $controllerName = "controllers\\".'ArticleController';
         }
 
         if($paramsArr[1]=='article'){

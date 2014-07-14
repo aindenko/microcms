@@ -20,9 +20,18 @@ class ArticleModel extends  Db{
     }
 
 
+    /**
+     * @param $user
+     * @param $route
+     * @return array
+     */
     public function getArticlesByUser($user, $route){
 
-        $sql = sprintf("SELECT * from %s", $this->table_name);
+        $curent = '';
+        $where = "WHERE is_protected=0";
+        if($user) $where = '';
+
+        $sql = sprintf("SELECT * from %s %s", $this->table_name, $where);
         $res = mysqli_query($this->db->link,$sql);
         $menu = array();
         while($row = mysqli_fetch_assoc($res)){
@@ -33,15 +42,20 @@ class ArticleModel extends  Db{
         return array('tree'=>$menu, 'curent'=>$curent);
     }
 
-    /*function formatTree($tree, $parent){
-        $tree2 = array();
-        foreach($tree as $i => $item){
-            if($item['parent_id'] == $parent){
-                $tree2[$item['id']] = $item;
-                $tree2[$item['id']]['submenu'] = $this->formatTree($tree, $item['id']);
-            }
-        }
+    /**
+     * @param $article
+     * @return int|string
+     */
+    public function updateArticle($article){
+        $sql = sprintf(
+            "UPDATE %s SET body='%s', title='%s' WHERE id=%d",
+            $this->table_name,
+            mysqli_real_escape_string($this->db->link,$article['body']),
+            mysqli_real_escape_string($this->db->link,$article['title']),
+            $article['id']);
+        mysqli_query($this->db->link,$sql);
+        return mysqli_insert_id($this->db->link);
+    }
 
-        return $tree2;
-    }*/
+
 } 
