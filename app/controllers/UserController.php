@@ -13,11 +13,13 @@ use microCMS\Controller;
 
 class UserController extends Controller {
 
-    function __construct(){
-        echo "Hello World";
+    private $app;
+    function __construct($app){
+        $this->app = $app;
     }
 
     public function loginAction(){
+
 
     }
 
