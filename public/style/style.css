@@ -113,3 +113,7 @@ nav ul ul li a:hover {
 nav ul ul ul {
     position: absolute; left: 100%; top:0;
 }
+
+.wrap{
+    min-height: 600px;
+}

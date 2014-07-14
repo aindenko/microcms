@@ -1,0 +1,22 @@
+<?php
+    function recurse($menuTree, $parent = 0, $route='/article/')
+    {
+        $ret = '<ul>';
+        foreach($menuTree as $index => $article)
+        {
+            if($article['parent_id'] == $parent)
+            {
+                $route2 = $route .$article['route'].'/';
+                $ret .= '<li><a href="'.$route2.'">' . $article['title'] . '</p></a>';
+                $ret .= recurse($menuTree, $article['id'], $route2);
+                $ret .= '</li>';
+            }
+
+        }
+        return $ret . '</ul>';
+    }
+
+?>
+<nav>
+    <?php echo recurse($this->menuTree,0)?>
+</nav>

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 ini_set('display_errors',1);
 set_include_path(implode(PATH_SEPARATOR, array(
     dirname(dirname(__FILE__)) . '/lib',

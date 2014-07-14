@@ -18,32 +18,38 @@ class UserController extends Controller {
     private $salt = '$@lt';
     function __construct($app){
         $this->app = $app;
+
+        $this->app->view->templateName = 'index.phtml';
     }
 
     private function _checkLogin($login, $password){
         $userModel = new UserModel($this->app->db);
         $user = $userModel->getUserByLogin($login);
         if(md5($password.$this->salt)== $user->hash){
-            return true;
+            return $user;
+        } else {
+            return false;
         }
     }
 
     public function loginAction(){
 
-        $this->app->view->templateName = 'index.phtml';
         if(isset($_POST['submit'])){
 
             $login = $_POST['login'];
             $password = $_POST['password'];
             if($user = $this->_checkLogin($login,$password)){
-                $_SESSION['user'] = $user;
+                 $_SESSION['user'] = $user;
+                 $this->app->view->userlogin = $user->login;
+                 $this->app->view->login = $this->app->view->render('loginscs.phtml');
             }
         }
 
-
     }
 
+
     public function logoutAction(){
+       unset($_SESSION['user']);
 
     }
 } 

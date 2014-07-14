@@ -25,11 +25,11 @@ class View {
     public function __get($name){
 
     }
-    public function render($templatePath = null){
+    public function render($templateName = null){
         $path = $this->path . $this->templateName;
 
-        if($templatePath){
-            $path = $templatePath;
+        if($templateName){
+            $path = $this->path . $templateName;
         }
         ob_start();
         include $path;

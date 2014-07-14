@@ -11,38 +11,10 @@
         <div class="col left_col"></div>
         <div class="menu">
             <h1>microCMS site v1.0</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Article 1</a></li>
-                    <li><a href="#">Article 2</a>
-                        <ul>
-                            <li><a href="#">Article 2.1</a></li>
-                            <li><a href="#">Article 2.2</a>
-                                <ul>
-                                    <li><a href="#">Article 2.2.1</a></li>
-                                    <li><a href="#">Article 2.2.2</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Article 2.3</a>
-                                <ul>
-                                    <li><a href="#">Article 2.3.1</a></li>
-                                    <li><a href="#">Article 2.3.2</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+            <?php echo $this->menu ?>
         </div>
         <div class="login">
-            <form action="user/login" method="post">
-                <label>Login:</label><br/>
-                <input name="login"  type="text" placeholder="Please enter login"/><br/>
-                <label>Password:</label><br/>
-                <input name="password" type="password" placeholder="Please  enter pass"/><br/>
-                <input name="submit" type="submit" value="Submit">
-            </form>
-
+            <?php echo $this->login ?>
         </div>
 
     </div>

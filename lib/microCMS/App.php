@@ -9,6 +9,8 @@ class App{
     public $settings = array();
     public $path;
     public $db;
+    public $user;
+    public $query;
 
     public function __construct($path, $iniPath){
         //set settings
@@ -40,21 +42,42 @@ class App{
         $params = parse_url($URLParams);
 
 
-
-        $paramsArr = explode('/',$params['path']);
-        if($paramsArr[1]){
-            $controllerName = "controllers\\".$availableRoutes[$paramsArr[1]].'Controller';
+        //check user login
+        if(isset($_SESSION['user'])){
+            $this->user = $_SESSION['user'];
+            $this->view->userlogin = $this->user->login;
+            $this->view->login = $this->view->render('loginscs.phtml');
         } else {
-            $controllerName = "controllers\\".'IndexController';
-            $actionName  = 'indexAction';
-            $templateName = 'index.phtml';
+            $this->view->login = $this->view->render('login.phtml');
         }
 
+        $actionName  = 'indexAction';
+        $templateName = 'index.phtml';
 
+        $paramsArr = explode('/',$params['path']);
+        if($paramsArr[1] && $paramsArr[1]!="index.php"){
+            $controllerName = "controllers\\".$availableRoutes[$paramsArr[1]].'Controller';
+            if(!empty($paramsArr[2])&&$paramsArr[1]!='article'){
+                $actionName = $paramsArr[2].'Action';
+                $templateName = $paramsArr[2].'.phtml';
 
-        if(!empty($paramsArr[2])){
-            $actionName = $paramsArr[2].'Action';
-            $templateName = $paramsArr[2].'.phtml';
+            }
+        } else {
+
+            $controllerName = "controllers\\".'IndexController';
+        }
+
+        if($paramsArr[1]=='article'){
+            $this->query = array();
+            if(isset($paramsArr[2])&&!empty($paramsArr[2])){
+                $this->query['param1']=$paramsArr[2];
+            }
+            if(isset($paramsArr[3])&&!empty($paramsArr[3])){
+                $this->query['param2']=$paramsArr[3];
+            }
+            if(isset($paramsArr[4])&&!empty($paramsArr[4])){
+                $this->query['param3']=$paramsArr[4];
+            }
         }
 
         try{
@@ -67,16 +90,12 @@ class App{
         }catch (Exception $e){
 
         }
-
-       // print_r($this->view);
         //render view
         $this->view->content = $this->view->render();
         //render layout
-       echo  $this->view->render($this->view->path.$this->view->layoutName);
+       echo  $this->view->render($this->view->layoutName);
 
 
-
-       // $controller->settings = $params;
 
     }
 

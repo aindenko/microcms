@@ -21,8 +21,7 @@ class UserModel extends Db {
     public function getUserByLogin($login){
 
         $sql = sprintf("SELECT * from %s WHERE login = '%s'", $this->table_name, $login);
-        echo $sql;
-        print_r(mysqli_fetch_object(mysqli_query($this->db->link,$sql)));
+        return mysqli_fetch_object(mysqli_query($this->db->link,$sql));
     }
 
 } 
