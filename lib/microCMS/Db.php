@@ -11,7 +11,7 @@ namespace microCMS;
 
 class Db {
     private $settings = array();
-    private $link = false;
+    public $link = false;
 
     public function __construct(array $settings){
         $this->settings = $settings;

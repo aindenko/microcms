@@ -3,12 +3,14 @@
  * Created by PhpStorm.
  * User: Admin
  * Date: 13.07.14
- * Time: 16:04
+ * Time: 16:05
  */
 
 namespace models;
 
+
 use microCMS\Db;
-class User extends Db {
+
+class ArticleModel extends  Db{
 
 } 

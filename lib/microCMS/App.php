@@ -58,6 +58,7 @@ class App{
         }
 
         try{
+
             $this->view->templateName = $templateName;
             $controller = new $controllerName ($this);
             $controller->$actionName();
@@ -67,6 +68,7 @@ class App{
 
         }
 
+       // print_r($this->view);
         //render view
         $this->view->content = $this->view->render();
         //render layout
