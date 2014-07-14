@@ -18,7 +18,7 @@ define('LIB_PATH', PATH . '/lib');
 define('APP_PATH', PATH . '/app');
 
 require_once 'microCMS/Autoloader.php';
-//require_once 'lib/microCMS/Exception.php';
+
 
 
 try{
